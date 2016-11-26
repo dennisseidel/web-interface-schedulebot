@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { selectBook } import "../actions/index.js";
+import { selectBook } from "../actions/index.js";
 import { bindActionCreators } from "redux";
 
 class BookList extends Component {
