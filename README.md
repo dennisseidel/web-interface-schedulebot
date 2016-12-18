@@ -1,14 +1,15 @@
-# ReactStarter
+# React Client Template
 
-This starter repository walks you through the steps to create a React App. The steps are described in the commit history.
+This template repository walks you through the steps to create a React Client with several feature. The steps are described in the commit history in the following order:
+  - client side authentication with the [auth-service](https://github.com/dennisseidel/auth-service)
 
 ###Installation###
 
 Checkout this repo and install dependencies
 
 ```
-	> git clone https://github.com/dennisseidel/react-starter.git
-	> cd react-starter
+	> git clone https://github.com/dennisseidel/client-react.git
+	> cd client-react
 	> npm install
 ```
 
@@ -19,7 +20,7 @@ If you want to follow the steps how to create a react application from the begin
 Start the application with
 
 ```
-  > npm start
+  > npm run start
 ```
 
 and open it in your web browser under `localhost:8080`.
