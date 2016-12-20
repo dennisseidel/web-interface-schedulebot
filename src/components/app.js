@@ -11,6 +11,7 @@ class App extends Component {
     return (
       <div>
         <Header />
+        {this.props.children}
         <h1>Bookshop</h1>
         <BookList />
         <BookDetail />

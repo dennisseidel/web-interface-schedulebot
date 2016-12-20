@@ -2,10 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
-import { Router, Route, IndexRoute, browserHostory } from 'react-router';
+import { Router, Route, IndexRoute, hashHistory } from 'react-router';
 
 // Create new component. That componetn should produce HTML.
 import App from './components/app.js';
+import SigninForm from './components/auth/signin.js';
 import reducers from './reducers/';
 
 const createStoreWithMiddleware = applyMiddleware()(createStore);
@@ -13,8 +14,9 @@ const createStoreWithMiddleware = applyMiddleware()(createStore);
 // Put components into HTML
 ReactDOM.render(
   <Provider store={createStoreWithMiddleware(reducers)}>
-    <Router history={browserHostory}>
+    <Router history={hashHistory}>
       <Route path="/" component={App}>
+        <Route path="signin" component={SigninForm} />
       </Route>
     </Router>
   </Provider>,

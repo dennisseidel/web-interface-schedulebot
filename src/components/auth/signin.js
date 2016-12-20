@@ -1,25 +1,41 @@
 import React, { Component } from 'react';
-import { reduxForm } from 'redux-form';
+import { Field, reduxForm } from 'redux-form';
 
-class Signin extends Component {
+class SigninForm extends Component {
+  handleSignin({ email, password }) {
+    console.log('Email:', email);
+    console.log('Password:', password);
+    // Need to do something to log user in
+  }
   render() {
+    // Get handleSubmit of the props, supplied by redux-form
+    const { handleSubmit } = this.props;
     return(
-      <form>
-        <fieldset className="form-group">
-          <label>Email:</label>
-          <input className="form-control" />
-        </fieldset>
-        <fieldset className="form-group">
-          <label>Password:</label>
-          <input className="form-control" />
-        </fieldset>
-        <button action="submit" className="btn btn-primary">Sign in</button>
+      <form onSubmit={handleSubmit(this.handleSignin.bind(this))}>
+        <div className="form-group">
+          <label htmlFor="email">Email</label>
+          <Field name="email" component="input" type="email" className="form-control"/>
+        </div>
+        <div className="form-group">
+          <label htmlFor="password">Password</label>
+          <Field name="password" component="input" type="password" className="form-control"/>
+        </div>
+        <div>
+          <button type="submit" className="btn btn-primary">Submit</button>
+        </div>
       </form>
     );
   }
 }
 
-export default reduxForm({
-  form: 'signin',
-  fields: ['email', 'password']
-})(Signin);
+// Decorate the form component
+SigninForm = reduxForm({
+  // a unique name for this form
+  form: 'signin'
+})(SigninForm);
+
+export default SigninForm;
+
+
+// Documentation:
+// https://redux-form.com/6.3.1/docs/GettingStarted.md/
