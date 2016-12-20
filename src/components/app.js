@@ -4,10 +4,13 @@ import React, { Component } from 'react';
 import BookList from "./book-list.js";
 import BookDetail from "./book-detail.js";
 
+import Header from "./header.js";
+
 class App extends Component {
   render() {
     return (
       <div>
+        <Header />
         <h1>Bookshop</h1>
         <BookList />
         <BookDetail />
