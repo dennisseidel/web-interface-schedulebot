@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
+import * as actions from '../../actions/';
 
 class SigninForm extends Component {
   handleSignin({ email, password }) {
     console.log('Email:', email);
     console.log('Password:', password);
     // Need to do something to log user in
+    this.props.signinUser({ email, password });
   }
   render() {
     // Get handleSubmit of the props, supplied by redux-form
@@ -33,6 +36,9 @@ SigninForm = reduxForm({
   // a unique name for this form
   form: 'signin'
 })(SigninForm);
+
+//Use connect from react-redux to gain access to actions
+SigninForm = connect(null, actions)(SigninForm);
 
 export default SigninForm;
 
