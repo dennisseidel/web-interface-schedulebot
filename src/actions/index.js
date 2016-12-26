@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { hashHistory } from 'react-router';
 
 const ROOT_URL = 'http://localhost:3090';
 
@@ -12,13 +13,19 @@ export function selectBook(book) {
 export function signinUser({ email, password }) {
   return function(dispatch) {
     // Submit email/password to server
-    axios.post(`${ROOT_URL}/signin`, { email, password });
-    // if request is good:
-    // - update state to indicate user is authenticated
-    // - save the JWT token
-    // - redirect to the route '/feature'
+    axios.post(`${ROOT_URL}/signin`, { email, password })
+    .then((response) => {
+      // if request is good:
+      // - update state to indicate user is authenticated
+      // - save the JWT token
+      // - redirect to the route '/feature'
+      hashHistory.push('/feature');
+    })
+    .catch(() => {
+      // if request is bad:
+      // - show an error to the user
+    });
 
-    // if request is bad:
-    // - show an error to the user
+
   }
 }
