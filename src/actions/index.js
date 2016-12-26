@@ -20,7 +20,8 @@ export function signinUser({ email, password }) {
       // if request is good:
       // - update state to indicate user is authenticated
       dispatch({type: AUTH_USER });
-      // - save the JWT token
+      // - save the JWT token to localStorage
+      localStorage.setItem('token', response.data.token);
       // - redirect to the route '/feature'
       hashHistory.push('/feature');
     })
