@@ -9,30 +9,55 @@ class SignupForm extends Component {
     const { handleSubmit } = this.props;
     return(
       <form>
-        <div className="form-group">
-          <label htmlFor="email">Email</label>
-          <Field name="email" component="input" type="email" className="form-control"/>
-        </div>
-        <div className="form-group">
-          <label htmlFor="password">Password</label>
-          <Field name="password" component="input" type="password" className="form-control"/>
-        </div>
-        <div className="form-group">
-          <label htmlFor="passwordConfirm">Confirm Password</label>
-          <Field name="passwordConfirm" component="input" type="password" className="form-control"/>
-        </div>
-        <div>
+          <Field name="email" label="Email" component={renderField} type="text" />
+          <Field name="password" label="Password" component={renderField} type="password" />
+          <Field name="passwordConfirm" label="Confirm Password" component={renderField} type="password" />
           <button type="submit" className="btn btn-primary">Submit</button>
-        </div>
       </form>
     );
   }
 }
 
+const renderField = (props) => {
+  const { input, label, type, meta: { touched, error , invalid} } = props;
+	//Construct form-group class depending on form state
+	const groupClass = touched ? (invalid ? 'form-group has-danger':'form-group has-success') : 'form-group';
+	//Construct form-control class depending on form state
+	const inputClass = touched ? (invalid ? 'form-control form-control-danger':'form-control form-control-success') : 'form-control';
+	return (
+		<div className={groupClass}>
+			<label>{label}</label>
+			<input {...input} placeholder={label} type={type} className={inputClass} />
+			<div className="form-control-feedback">
+				{touched ? <span>{error}</span> : ''}
+			</div>
+		</div>
+	)
+}
+
+function validate(formProps) {
+  const errors = {};
+  if (!formProps.email) {
+    errors.email = 'Please enter an email';
+  }
+  if (!formProps.password) {
+    errors.password = 'Please enter an password';
+  }
+  if (!formProps.passwordConfirm) {
+    errors.passwordConfirm = 'Please confirm the password';
+  }
+  if (formProps.passwordConfirm !== formProps.password) {
+    errors.passwordConfirm = 'Passwords must match';
+    errors.password = 'Passwords must match';
+  }
+  return errors;
+}
+
 // Decorate the form component
 SignupForm = reduxForm({
   // a unique name for this form
-  form: 'signup'
+  form: 'signup',
+  validate
 })(SignupForm);
 
 //Use connect from react-redux to gain access to actions
