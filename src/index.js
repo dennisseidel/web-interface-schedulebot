@@ -8,7 +8,9 @@ import reduxThunk from 'redux-thunk';
 // Create new component. That componetn should produce HTML.
 import App from './components/app.js';
 import SigninForm from './components/auth/signin.js';
+import SignoutPage from './components/auth/signout.js';
 import reducers from './reducers/';
+
 
 const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
 
@@ -18,6 +20,7 @@ ReactDOM.render(
     <Router history={hashHistory}>
       <Route path="/" component={App}>
         <Route path="signin" component={SigninForm} />
+        <Route path="signout" component={SignoutPage} />
       </Route>
     </Router>
   </Provider>,
