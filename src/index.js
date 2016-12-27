@@ -8,6 +8,7 @@ import reduxThunk from 'redux-thunk';
 // Create new component. That componetn should produce HTML.
 import App from './components/app.js';
 import SigninForm from './components/auth/signin.js';
+import SignupForm from './components/auth/signup.js';
 import SignoutPage from './components/auth/signout.js';
 import reducers from './reducers/';
 
@@ -21,6 +22,7 @@ ReactDOM.render(
       <Route path="/" component={App}>
         <Route path="signin" component={SigninForm} />
         <Route path="signout" component={SignoutPage} />
+        <Route path="signup" component={SignupForm} />
       </Route>
     </Router>
   </Provider>,
