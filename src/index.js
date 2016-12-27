@@ -12,6 +12,7 @@ import SignupForm from './components/auth/signup.js';
 import SignoutPage from './components/auth/signout.js';
 import BookPage from './components/book-page.js';
 import RequireAuth from './components/auth/require_auth.js';
+import WelcomePage from './components/welcome-page.js';
 import reducers from './reducers/';
 
 
@@ -22,6 +23,7 @@ ReactDOM.render(
   <Provider store={createStoreWithMiddleware(reducers)}>
     <Router history={hashHistory}>
       <Route path="/" component={App}>
+        <IndexRoute component={WelcomePage} />
         <Route path="signin" component={SigninForm} />
         <Route path="signout" component={SignoutPage} />
         <Route path="signup" component={SignupForm} />
