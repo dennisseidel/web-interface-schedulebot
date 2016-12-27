@@ -11,6 +11,7 @@ import SigninForm from './components/auth/signin.js';
 import SignupForm from './components/auth/signup.js';
 import SignoutPage from './components/auth/signout.js';
 import BookPage from './components/book-page.js';
+import RequireAuth from './components/auth/require_auth.js';
 import reducers from './reducers/';
 
 
@@ -24,7 +25,7 @@ ReactDOM.render(
         <Route path="signin" component={SigninForm} />
         <Route path="signout" component={SignoutPage} />
         <Route path="signup" component={SignupForm} />
-        <Route path="feature" component={BookPage} />
+        <Route path="feature" component={RequireAuth(BookPage)} />
       </Route>
     </Router>
   </Provider>,
