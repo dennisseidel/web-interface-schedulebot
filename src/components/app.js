@@ -12,7 +12,6 @@ class App extends Component {
       <div>
         <Header />
         {this.props.children}
-        <h1>Bookshop</h1>
         <BookList />
         <BookDetail />
       </div>
