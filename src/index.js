@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
 import { Router, Route, IndexRoute, hashHistory } from 'react-router';
 import reduxThunk from 'redux-thunk';
@@ -19,7 +19,10 @@ import reducers from './reducers/';
 
 
 const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
-const store = createStoreWithMiddleware(reducers);
+const enhancers = compose(
+  window.devToolsExtension ? window.devToolsExtension() : f => f
+)
+const store = createStoreWithMiddleware(reducers, enhancers);
 
 const token = localStorage.getItem('token');
 //if token already exist in local storage consider user to be signed in
