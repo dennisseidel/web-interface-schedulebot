@@ -5,13 +5,27 @@ import * as actions from '../../actions/';
 
 
 class SignupForm extends Component {
+  handleSignup(formProps) {
+    // call action creator to signup the user
+    this.props.signupUser(formProps);
+  }
+  renderAlert() {
+    if (this.props.errorMessage) {
+      return (
+        <div className="alert alert-danger">
+          <strong>Error:</strong> {this.props.errorMessage}
+        </div>
+      );
+    }
+  }
   render() {
     const { handleSubmit } = this.props;
     return(
-      <form>
+      <form onSubmit={handleSubmit(this.handleSignup.bind(this))}>
           <Field name="email" label="Email" component={renderField} type="text" />
           <Field name="password" label="Password" component={renderField} type="password" />
           <Field name="passwordConfirm" label="Confirm Password" component={renderField} type="password" />
+          {this.renderAlert()}
           <button type="submit" className="btn btn-primary">Submit</button>
       </form>
     );
@@ -53,6 +67,10 @@ function validate(formProps) {
   return errors;
 }
 
+function mapStateToProps(state) {
+  return { errorMessage: state.auth.error };
+}
+
 // Decorate the form component
 SignupForm = reduxForm({
   // a unique name for this form
@@ -61,6 +79,6 @@ SignupForm = reduxForm({
 })(SignupForm);
 
 //Use connect from react-redux to gain access to actions
-SignupForm = connect(null, actions)(SignupForm);
+SignupForm = connect(mapStateToProps, actions)(SignupForm);
 
 export default SignupForm;
