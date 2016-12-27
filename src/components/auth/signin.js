@@ -10,6 +10,15 @@ class SigninForm extends Component {
     // Need to do something to log user in
     this.props.signinUser({ email, password });
   }
+  renderAlert() {
+    if(this.props.errorMessage) {
+      return(
+        <div className="alert alert-danger">
+          <strong>Error:</strong>{this.props.errorMessage}
+        </div>
+      )
+    }
+  }
   render() {
     // Get handleSubmit of the props, supplied by redux-form
     const { handleSubmit } = this.props;
@@ -24,12 +33,18 @@ class SigninForm extends Component {
           <Field name="password" component="input" type="password" className="form-control"/>
         </div>
         <div>
+          {this.renderAlert()}
           <button type="submit" className="btn btn-primary">Submit</button>
         </div>
       </form>
     );
   }
 }
+
+function mapStateToProps(state) {
+  return { errorMessage: state.auth.error };
+}
+
 
 // Decorate the form component
 SigninForm = reduxForm({
@@ -38,7 +53,7 @@ SigninForm = reduxForm({
 })(SigninForm);
 
 //Use connect from react-redux to gain access to actions
-SigninForm = connect(null, actions)(SigninForm);
+SigninForm = connect(mapStateToProps, actions)(SigninForm);
 
 export default SigninForm;
 
