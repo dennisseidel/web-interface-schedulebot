@@ -4,7 +4,8 @@ import { hashHistory } from 'react-router';
 import {
   AUTH_USER,
   AUTH_ERROR,
-  UNAUTH_USER
+  UNAUTH_USER,
+  FETCH_BOOKS
 } from './types.js';
 
 const ROOT_URL = 'http://localhost:3090';
@@ -63,5 +64,19 @@ export function signupUser({ email, password }){
         authError(error.response.data.error)
       )
     });
+  }
+}
+
+export function fetchBooks(){
+  return function(dispatch){
+    axios.get(ROOT_URL, {
+      headers: { authorization: localStorage.getItem('token') }
+    })
+    .then(response => {
+      dispatch({
+        type: FETCH_BOOKS,
+        payload: response.data
+      });
+    })
   }
 }

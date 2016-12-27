@@ -1,8 +1,11 @@
-export default function() {
-  return [
-    { title: "The Javascript book", pages: 12 },
-    { title: "The Atom book", pages: 100 },
-    { title: "The Go book", pages: 50 },
-    { title: "The dummy book", pages: 1000 }
-  ]
-}
+import {
+  FETCH_BOOKS
+} from '../actions/types.js';
+
+export default function(state=[], action) {
+  switch(action.type) {
+    case FETCH_BOOKS:
+      return { ...state, books: action.payload };
+  }
+  return state;
+};
