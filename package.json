@@ -4,9 +4,12 @@
   "description": "Simple tutorial React App with Babel support",
   "main": "index.js",
   "repository": "git@github.com:dennisseidel/react-starter.git",
+  "engines": {
+    "node": "7.4.0"
+  },
   "scripts": {
     "start": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js",
-    "test": "mocha --compilers js:babel-core/register --require ./test/test_helper.js --recursive ./test",
+    "test": "export NODE_ENV=test && mocha --compilers js:babel-core/register --require ./test/test_helper.js --recursive ./test",
     "test:watch": "npm run test -- --watch"
   },
   "author": "",
@@ -23,7 +26,13 @@
     "mocha": "^3.2.0",
     "react-addons-test-utils": "^15.4.1",
     "webpack": "^1.14.0",
-    "webpack-dev-server": "^1.16.2"
+    "webpack-dev-server": "^1.16.2",
+    "eslint": "^3.12.2",
+    "eslint-config-airbnb": "^13.0.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^2.2.3",
+    "eslint-plugin-react": "^6.8.0",
+    "nodemon": "^1.11.0"
   },
   "dependencies": {
     "axios": "^0.15.3",
