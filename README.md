@@ -1,7 +1,9 @@
-# React Client Template
+# Web Interface Schedule-Bot
 
-This template repository walks you through the steps to create a React Client with several feature. The steps are described in the commit history in the following order:
-  - client side authentication with the [auth-service](https://github.com/dennisseidel/auth-service)
+This is the Web Interface for the Schedule-Bot. It is build with: 
+
+- React
+- Redux
 
 ###Installation###
 
@@ -24,3 +26,8 @@ Start the application with
 ```
 
 and open it in your web browser under `localhost:8080`.
+
+## Pull Update from the base [React/Redux Client Template](https://github.com/dennisseidel/web-interface-schedulebot)
+```
+git pull upstream master && git push origin master
+```
