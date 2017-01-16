@@ -2,15 +2,17 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 
+require('../../style/header.scss');
+
 class Header extends Component {
   renderLinks() {
-    if(this.props.authenticated) {
+    if (this.props.authenticated) {
       // show a link to sign out
-      return(
+      return (
         <li className="nav-item">
           <Link to="/signout" className="nav-link">Sign out</Link>
         </li>
-      )
+      );
     } else {
       // show a link to sign in or sign up
       return [
@@ -19,14 +21,14 @@ class Header extends Component {
         </li>,
         <li className="nav-item" key={2}>
           <Link to="/signup" className="nav-link">Sign up</Link>
-        </li>
-      ]
+        </li>,
+      ];
     }
   }
   render() {
     return (
-      <nav className="navbar navbar-light">
-        <Link to="/" className="navbar-brand">Bookshop</Link>
+      <nav className="navbar navbar-toggleable-md navbar-light bg-faded">
+        <Link to="/" className="navbar-brand mb-0">Schedully</Link>
         <ul className="nav navbar-nav">
           {this.renderLinks()}
         </ul>
@@ -37,8 +39,8 @@ class Header extends Component {
 
 function mapStateToProps(state) {
   return {
-    authenticated: state.auth.authenticated
-  }
+    authenticated: state.auth.authenticated,
+  };
 }
 
 export default connect(mapStateToProps)(Header);
