@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import io from 'socket.io-client';
 import * as actions from '../actions/';
+import Chatbox from './chatbox';
 
-import Chatbox from './chatbox.jsx';
+const socket = io('http://localhost:3000');
 
 class Chat extends Component {
   renderList() {
@@ -27,9 +29,11 @@ class Chat extends Component {
       ));
   }
 
-  // componentWillMount() {
-  //   this.props.fetchBooks();
-  // }
+  componentWillMount() {
+    // todo: fetch inital Data from the socket
+
+    // this.props.fetchBooks();
+  }
   render() {
     return (
       <div>
