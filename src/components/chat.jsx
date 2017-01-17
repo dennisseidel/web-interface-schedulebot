@@ -8,6 +8,12 @@ import Chatbox from './chatbox';
 export const socket = io('http://localhost:3000');
 
 class Chat extends Component {
+  componentDidMount() {
+    socket.on('bot-message', (msg) => {
+      console.log('Bot Message:', msg);
+    });
+  }
+
   handleSend({ chatInput }) {
     // Need to do something to log user in -> call action creator
     this.props.sendChat({
@@ -38,7 +44,6 @@ class Chat extends Component {
         />
       ));
   }
-
 
   render() {
     // Get handleSubmit of the props, supplied by redux-form
