@@ -11,26 +11,26 @@ class SigninForm extends Component {
     this.props.signinUser({ email, password });
   }
   renderAlert() {
-    if(this.props.errorMessage) {
-      return(
+    if (this.props.errorMessage) {
+      return (
         <div className="alert alert-danger">
           <strong>Error:</strong>{this.props.errorMessage}
         </div>
-      )
+      );
     }
   }
   render() {
     // Get handleSubmit of the props, supplied by redux-form
     const { handleSubmit } = this.props;
-    return(
+    return (
       <form onSubmit={handleSubmit(this.handleSignin.bind(this))}>
         <div className="form-group">
           <label htmlFor="email">Email</label>
-          <Field name="email" component="input" type="email" className="form-control"/>
+          <Field name="email" component="input" type="email" className="form-control" />
         </div>
         <div className="form-group">
           <label htmlFor="password">Password</label>
-          <Field name="password" component="input" type="password" className="form-control"/>
+          <Field name="password" component="input" type="password" className="form-control" />
         </div>
         <div>
           {this.renderAlert()}
@@ -49,10 +49,10 @@ function mapStateToProps(state) {
 // Decorate the form component
 SigninForm = reduxForm({
   // a unique name for this form
-  form: 'signin'
+  form: 'signin',
 })(SigninForm);
 
-//Use connect from react-redux to gain access to actions
+// Use connect from react-redux to gain access to actions
 SigninForm = connect(mapStateToProps, actions)(SigninForm);
 
 export default SigninForm;
