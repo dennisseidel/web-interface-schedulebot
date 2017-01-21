@@ -1,4 +1,6 @@
-import { SEND_CHAT } from '../actions/types';
+import {
+  SEND_CHAT,
+  RECIEVE_CHAT } from '../actions/types';
 
 export default function (state = [
   {
@@ -36,6 +38,8 @@ export default function (state = [
     case SEND_CHAT:
       console.log('Action', action);
       // return { ...state, chat: action.payload };
+      return [...state, action.payload];
+    case RECIEVE_CHAT:
       return [...state, action.payload];
   }
   return state;

@@ -6,11 +6,19 @@ import {
   AUTH_ERROR,
   UNAUTH_USER,
   FETCH_BOOKS,
-  SEND_CHAT
+  SEND_CHAT,
+  RECIEVE_CHAT
 } from './types.js';
 import { socket } from '../components/chat';
 
 const ROOT_URL = 'http://localhost:3090';
+
+export function recieveChat(message) {
+  return {
+    type: RECIEVE_CHAT,
+    payload: message,
+  }
+}
 
 export function sendChat(message) {
   return function (dispatch) {

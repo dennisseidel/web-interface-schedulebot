@@ -7,7 +7,7 @@ import Chat from './chat';
 class BookPage extends Component {
   render() {
     return (
-      <div className="text-center mx-5">
+      <div>
         <Chat />
       </div>
     );

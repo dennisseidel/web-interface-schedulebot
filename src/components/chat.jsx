@@ -11,6 +11,7 @@ class Chat extends Component {
   componentDidMount() {
     socket.on('bot-message', (msg) => {
       console.log('Bot Message:', msg);
+      this.props.recieveChat(msg);
     });
   }
 
@@ -49,7 +50,7 @@ class Chat extends Component {
     // Get handleSubmit of the props, supplied by redux-form
     const { handleSubmit } = this.props;
     return (
-      <div>
+      <div className="container">
         {this.renderList()}
         <form onSubmit={handleSubmit(this.handleSend.bind(this))}>
           <div className="form-group">
