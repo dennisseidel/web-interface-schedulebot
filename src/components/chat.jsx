@@ -35,7 +35,7 @@ class Chat extends Component {
       );
     }
     const chatMessages = this.props.chat;
-    const latestMessages = chatMessages.slice(chatMessages.length - 4, chatMessages.length);
+    const latestMessages = chatMessages.slice(chatMessages.length - 7, chatMessages.length);
     return latestMessages.map(
       chat => (
         <Chatbox
