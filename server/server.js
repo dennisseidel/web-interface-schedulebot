@@ -5,8 +5,6 @@ const compress = require('compression');
 const port = process.env.PORT || 3000;
 const app = express();
 
-console.log('ENV', process.env);
-
 // Apply gzip compression
 app.use(compress());
 
