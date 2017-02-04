@@ -6,7 +6,6 @@ import * as actions from '../actions/';
 import Chatbox from './chatbox';
 
 const BACKEND_ROOT_URL = process.env.BACKEND_ROOT_URL || 'http://localhost:3000';
-console.log('ENV', process.env);
 
 export const socket = io(BACKEND_ROOT_URL);
 
