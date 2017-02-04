@@ -1,4 +1,5 @@
 const webpack = require('webpack');
+const path = require('path');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
@@ -6,7 +7,7 @@ module.exports = {
     './src/index.js',
   ],
   output: {
-    path: `${__dirname}/public`,
+    path: path.join(__dirname, 'public'),
     publicPath: '/',
     filename: 'bundle.js',
   },
