@@ -11,7 +11,7 @@ import {
 } from './types.js';
 import { socket } from '../components/chat';
 
-const ROOT_URL = 'http://localhost:3090';
+const ROOT_URL = process.env.AUTH_ROOT_URL || 'http://localhost:3090';
 
 export function recieveChat(message) {
   return {
