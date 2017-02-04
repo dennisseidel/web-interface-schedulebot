@@ -5,7 +5,8 @@ import io from 'socket.io-client';
 import * as actions from '../actions/';
 import Chatbox from './chatbox';
 
-let BACKEND_ROOT_URL = BACKEND_ROOT_URL || 'http://localhost:3000';
+const BACKEND_ROOT_URL = process.env.BACKEND_ROOT_URL || 'http://localhost:3000';
+console.log('ENV', process.env);
 
 export const socket = io(BACKEND_ROOT_URL);
 
