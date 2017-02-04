@@ -60,7 +60,6 @@
     "redux": "^3.6.0",
     "redux-form": "^6.4.1",
     "redux-thunk": "^2.1.0",
-    "socket.io-client": "^1.7.2",
-    "webpack": "^1.14.0"
+    "socket.io-client": "^1.7.2"
   }
 }
