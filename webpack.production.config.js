@@ -44,8 +44,8 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify('production'),
-        BACKEND_ROOT_URL: JSON.stringify('https://backend-service-schedulebot.mybluemix.net/'),
-        AUTH_ROOT_URL: JSON.stringify('https://auth-service-schedulebot.mybluemix.net/'),
+        BACKEND_ROOT_URL: JSON.stringify('https://backend-service-schedulebot.mybluemix.net'),
+        AUTH_ROOT_URL: JSON.stringify('https://auth-service-schedulebot.mybluemix.net'),
       },
     }),
     new CopyWebpackPlugin([{
