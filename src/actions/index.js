@@ -29,13 +29,6 @@ export function sendChat(message) {
   };
 }
 
-export function selectBook(book) {
-  return {
-    type: 'BOOK_SELECTED',
-    payload: book,
-  };
-}
-
 export function signinUser({ email, password }) {
   return function (dispatch) {
     // Submit email/password to server

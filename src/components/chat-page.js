@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import Chat from './chat';
 
-class BookPage extends Component {
+class ChatPage extends Component {
   render() {
     return (
       <div>
@@ -12,4 +12,4 @@ class BookPage extends Component {
   }
 }
 
-export default BookPage;
+export default ChatPage;
