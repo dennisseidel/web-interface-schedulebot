@@ -47,8 +47,8 @@ export function signinUser({ email, password }) {
       dispatch({ type: AUTH_USER });
       // - save the JWT token to localStorage
       localStorage.setItem('token', response.data.token);
-      // - redirect to the route '/feature'
-      hashHistory.push('/feature');
+      // - redirect to the route '/chat'
+      hashHistory.push('/chat');
     })
     .catch(() => {
       // if request is bad:
@@ -77,7 +77,7 @@ export function signupUser({ email, password }) {
     .then((response) => {
       dispatch({ type: AUTH_USER });
       localStorage.setItem('token', response.data.token);
-      hashHistory.push('/feature');
+      hashHistory.push('/chat');
     })
     .catch((error) => {
       dispatch(

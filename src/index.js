@@ -15,7 +15,7 @@ import App from './components/app';
 import SigninForm from './components/auth/signin';
 import SignupForm from './components/auth/signup';
 import SignoutPage from './components/auth/signout';
-import BookPage from './components/chat-page';
+import ChatPage from './components/chat-page';
 import RequireAuth from './components/auth/require_auth';
 import WelcomePage from './components/welcome-page';
 import reducers from './reducers/';
@@ -43,7 +43,7 @@ ReactDOM.render(
         <Route path="signin" component={SigninForm} />
         <Route path="signout" component={SignoutPage} />
         <Route path="signup" component={SignupForm} />
-        <Route path="feature" component={RequireAuth(BookPage)} />
+        <Route path="chat" component={RequireAuth(ChatPage)} />
       </Route>
     </Router>
   </Provider>,
