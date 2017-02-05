@@ -9,8 +9,3 @@ export default () => (
     <ChatBox usertype="bot" text="I can help you, but please sign in first. The button is right at the top. Thank you!" />
   </div>
     );
-
-
-// <div className="container">
-    //    <h3 className="display-6">Welcome to the amazing bookstore with React/Redux</h3>
-    // </div>
