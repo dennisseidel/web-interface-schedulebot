@@ -5,10 +5,9 @@ import {
   AUTH_USER,
   AUTH_ERROR,
   UNAUTH_USER,
-  FETCH_BOOKS,
   SEND_CHAT,
-  RECIEVE_CHAT
-} from './types.js';
+  RECIEVE_CHAT,
+} from './types';
 import { socket } from '../components/chat';
 
 const ROOT_URL = process.env.AUTH_ROOT_URL || 'http://localhost:3090';
@@ -17,14 +16,14 @@ export function recieveChat(message) {
   return {
     type: RECIEVE_CHAT,
     payload: message,
-  }
+  };
 }
 
 export function sendChat(message) {
   return function (dispatch) {
     const jwt = localStorage.getItem('token');
     socket.emit('chat-input', jwt, message);
-    dispatch({ 
+    dispatch({
       type: SEND_CHAT,
       payload: message });
   };
@@ -80,23 +79,7 @@ export function signupUser({ email, password }) {
       hashHistory.push('/chat');
     })
     .catch((error) => {
-      dispatch(
-        authError(error.response.data.error),
-      );
-    });
-  };
-}
-
-export function fetchBooks() {
-  return function (dispatch) {
-    axios.get(ROOT_URL, {
-      headers: { authorization: localStorage.getItem('token') },
-    })
-    .then((response) => {
-      dispatch({
-        type: FETCH_BOOKS,
-        payload: response.data,
-      });
+      dispatch(authError(error.response.data.error));
     });
   };
 }
