@@ -11,12 +11,12 @@ import '../node_modules/bootstrap/scss/bootstrap.scss';
 import { AUTH_USER } from './actions/types.js';
 
 // Create new component. That componetn should produce HTML.
-import App from './components/app.js';
-import SigninForm from './components/auth/signin.js';
-import SignupForm from './components/auth/signup.js';
-import SignoutPage from './components/auth/signout.js';
-import BookPage from './components/book-page.js';
-import RequireAuth from './components/auth/require_auth.js';
+import App from './components/app';
+import SigninForm from './components/auth/signin';
+import SignupForm from './components/auth/signup';
+import SignoutPage from './components/auth/signout';
+import BookPage from './components/chat-page';
+import RequireAuth from './components/auth/require_auth';
 import WelcomePage from './components/welcome-page';
 import reducers from './reducers/';
 
