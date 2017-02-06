@@ -25,9 +25,9 @@
     "chai-jquery": "^2.0.0",
     "css-loader": "^0.26.1",
     "eslint": "^3.12.2",
-    "eslint-config-airbnb": "^13.0.0",
+    "eslint-config-airbnb": "^14.1.0",
     "eslint-plugin-import": "^2.2.0",
-    "eslint-plugin-jsx-a11y": "^2.2.3",
+    "eslint-plugin-jsx-a11y": "^4.0.0",
     "eslint-plugin-react": "^6.8.0",
     "jquery": "^3.1.1",
     "jsdom": "^9.9.1",
@@ -36,8 +36,8 @@
     "react-addons-test-utils": "^15.4.1",
     "sass-loader": "^4.1.1",
     "style-loader": "^0.13.1",
-    "webpack": "^1.14.0",
-    "webpack-dev-server": "^1.16.2"
+    "webpack": "^2.2.1",
+    "webpack-dev-server": "^2.3.0"
   },
   "dependencies": {
     "axios": "^0.15.3",
@@ -60,6 +60,7 @@
     "redux": "^3.6.0",
     "redux-form": "^6.4.1",
     "redux-thunk": "^2.1.0",
-    "socket.io-client": "^1.7.2"
+    "socket.io-client": "^1.7.2",
+    "watson-developer-cloud": "^2.17.0"
   }
 }
