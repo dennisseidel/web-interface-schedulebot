@@ -1,35 +1,53 @@
+const webpack = require('webpack');
+const path = require('path');
+const DashboardPlugin = require('webpack-dashboard/plugin');
+
 module.exports = {
-  entry: [
-    './src/index.js',
-  ],
+  entry: './src/index.js',
   output: {
-    path: __dirname,
+    path: path.join(__dirname, 'public'),
     publicPath: '/',
     filename: 'bundle.js',
   },
   module: {
-    loaders: [
-      {
-        // Test expects a RegExp! Note the slashes!
-        test: /\.css$/,
-        loaders: ['style', 'css'],
-        //Include accepts either a path or an array of paths
-        //include: PATHS.app
+    rules: [{
+        test: /\.(js|jsx)$/,
+        exclude: /node_modules/,
+        use: [
+          'babel-loader',
+        ],
       },
       {
-        exclude: /node_modules/,
-        loader: 'babel',
-        query: {
-          presets: ['react', 'es2015', 'stage-1'],
-        },
+        test: /\.css$/,
+        loaders: ['style-loader', 'css-loader'],
       },
       {
         test: /\.scss$/,
-        loaders: ['style', 'css', 'sass'],
-      }],
+        use: [
+          'style-loader', 
+          'css-loader',
+          'sass-loader',
+        ],
+      },
+    ]
   },
-  resolve: {
-    extensions: ['', '.js', '.jsx'],
+  plugins: [
+    new webpack.HotModuleReplacementPlugin(),
+    new DashboardPlugin(),
+  ],
+  resolve: 
+  {
+    extensions: ['.json', '.js', '.jsx'],
+    modules: [
+      path.resolve(__dirname, 'node_modules'),
+       path.join(__dirname, './src'),
+    ],
+  },
+  node: {
+    console: true,
+    fs: 'empty',
+    net: 'empty',
+    tls: 'empty'
   },
   devServer: {
     historyApiFallback: true,
