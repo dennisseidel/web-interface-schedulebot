@@ -2,13 +2,14 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import io from 'socket.io-client';
+import axios from 'axios';
 import * as actions from '../actions/';
 import Chatbox from './chatbox';
 
 const BACKEND_ROOT_URL = process.env.BACKEND_ROOT_URL || 'http://localhost:3000';
 export const socket = io(BACKEND_ROOT_URL);
-var mediaRecorder = null;
-var chunks = [];
+let mediaRecorder = null;
+const chunks = [];
 class Chat extends Component {
 
   componentDidMount() {
@@ -21,30 +22,34 @@ class Chat extends Component {
   handleStopClick() {
     mediaRecorder.stop();
     console.log(mediaRecorder.state);
-    console.log("recorder stopped");
-    var blob = new Blob(chunks, { 'type' : 'audio/ogg; codecs=opus' });
+    console.log('recorder stopped');
+    const blob = new Blob(chunks, { type: 'audio/ogg; codecs=opus' });
     console.log(blob);
   }
 
   handleMicClick() {
     // record audio https://developer.mozilla.org/en-US/docs/Web/API/MediaStream_Recording_API/Using_the_MediaStream_Recording_API
-    if (navigator.mediaDevices.getUserMedia) {
-      console.log('getUserMedia supported.');
-      navigator.mediaDevices.getUserMedia({ audio: true }).then((mediaStream) => {
-        mediaRecorder = new MediaRecorder(mediaStream);
-        mediaRecorder.start();
-        console.log(mediaRecorder.state);
-        console.log("recorder started");
-        mediaRecorder.ondataavailable = function(e) {
-             chunks.push(e.data);
-            } 
-      }).catch((err) => {
-        console.log('The following gUM error occured: ' + err); 
-      });
+    axios.get('http://localhost:3000/watsoncloud/stt/token')
+    .then((res) => {
+      const token = res.data.token;
+      if (navigator.mediaDevices.getUserMedia) {
+        console.log('getUserMedia supported.');
+        navigator.mediaDevices.getUserMedia({ audio: true }).then((mediaStream) => {
+          mediaRecorder = new MediaRecorder(mediaStream);
+          mediaRecorder.start();
+          console.log(mediaRecorder.state);
+          console.log('recorder started');
+          mediaRecorder.ondataavailable = function (e) {
+            chunks.push(e.data);
+          };
+        }).catch((err) => {
+          console.log(`The following gUM error occured: ${err}`);
+        });
       } else {
         console.log('getUserMedia not supported on your browser!');
-      } 
-    }
+      }
+    });
+  }
 
   handleSend({ chatInput }) {
     // Need to do something to log user in -> call action creator
