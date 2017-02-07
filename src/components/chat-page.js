@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import Chat from './chat';
+import Chat from './chat.jsx';
 
 class ChatPage extends Component {
   render() {

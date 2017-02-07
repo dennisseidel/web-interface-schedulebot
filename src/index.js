@@ -17,7 +17,7 @@ import SignupForm from './components/auth/signup';
 import SignoutPage from './components/auth/signout';
 import ChatPage from './components/chat-page';
 import RequireAuth from './components/auth/require_auth';
-import WelcomePage from './components/welcome-page';
+import WelcomePage from './components/welcome-page.jsx';
 import reducers from './reducers/';
 
 
