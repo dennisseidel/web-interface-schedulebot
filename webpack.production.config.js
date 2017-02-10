@@ -39,12 +39,6 @@ module.exports = {
       path.join(__dirname, './src'),
     ],
   },
-  node: {
-    console: true,
-    fs: 'empty',
-    net: 'empty',
-    tls: 'empty',
-  },
   devServer: {
     historyApiFallback: true,
     contentBase: './',
