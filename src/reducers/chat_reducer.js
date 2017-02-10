@@ -36,8 +36,6 @@ export default function (state = [
 ], action) {
   switch (action.type) {
     case SEND_CHAT:
-      console.log('Action', action);
-      // return { ...state, chat: action.payload };
       return [...state, action.payload];
     case RECIEVE_CHAT:
       return [...state, action.payload];

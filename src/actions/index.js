@@ -43,9 +43,13 @@ export function record() {
 }
 
 export function recieveChat(message) {
-  return {
-    type: RECIEVE_CHAT,
-    payload: message,
+  return function (dispatch) {
+    dispatch(
+      {
+        type: RECIEVE_CHAT,
+        payload: message,
+      });
+    dispatch(record());
   };
 }
 
