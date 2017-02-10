@@ -10,13 +10,14 @@ import {
   RECIEVE_CHAT,
 } from './types';
 import { socket } from '../components/chat';
+import { BACKEND_ROOT_URL } from '../components/chat';
 
 const ROOT_URL = process.env.AUTH_ROOT_URL || 'http://localhost:3090';
 
 
 export function record() {
   return function (dispatch) {
-    axios.get('http://localhost:3000/watsoncloud/stt/token')
+    axios.get(`${BACKEND_ROOT_URL}/watsoncloud/stt/token`)
     .then((res) => {
       console.log('res:', res.data);
       const stream = recognizeMicrophone({

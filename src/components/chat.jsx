@@ -5,7 +5,7 @@ import io from 'socket.io-client';
 import * as actions from '../actions/';
 import Chatbox from './chatbox';
 
-const BACKEND_ROOT_URL = process.env.BACKEND_ROOT_URL || 'http://localhost:3000';
+export const BACKEND_ROOT_URL = process.env.BACKEND_ROOT_URL || 'http://localhost:3000';
 export const socket = io(BACKEND_ROOT_URL);
 
 class Chat extends Component {
