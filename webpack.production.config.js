@@ -16,9 +16,6 @@ module.exports = {
       use: [
         'babel-loader',
       ],
-      query: {
-        presets: ['react', 'es2015', 'stage-1'],
-      },
     },
     {
       test: /\.css$/,
@@ -36,7 +33,7 @@ module.exports = {
   },
   resolve:
   {
-    extensions: ['', '.json', '.js', '.jsx'],
+    extensions: ['.json', '.js', '.jsx'],
     modules: [
       path.resolve(__dirname, 'node_modules'),
       path.join(__dirname, './src'),
@@ -64,8 +61,6 @@ module.exports = {
     new CopyWebpackPlugin([{
       from: './*.html',
     }]),
-    new webpack.optimize.CommonsChunkPlugin('common.js'),
-    new webpack.optimize.DedupePlugin(),
     new webpack.optimize.UglifyJsPlugin(),
     new webpack.optimize.AggressiveMergingPlugin(),
   ],
