@@ -35,8 +35,8 @@ module.exports = {
   {
     extensions: ['.json', '.js', '.jsx'],
     modules: [
-      path.resolve(__dirname, 'node_modules'),
       path.join(__dirname, './src'),
+      'node_modules',
     ],
   },
   devServer: {
