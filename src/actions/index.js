@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { hashHistory } from 'react-router';
+import recognizeMicrophone from 'watson-speech/speech-to-text/recognize-microphone';
 
 import {
   AUTH_USER,
@@ -11,6 +12,34 @@ import {
 import { socket } from '../components/chat';
 
 const ROOT_URL = process.env.AUTH_ROOT_URL || 'http://localhost:3090';
+
+
+export function record() {
+  return function (dispatch) {
+    axios.get('http://localhost:3000/watsoncloud/stt/token')
+    .then((res) => {
+      console.log('res:', res.data);
+      const stream = recognizeMicrophone({
+        token: res.data.token,
+        continuous: false, // false = automatically stop transcription the first time a pause is detected
+      });
+      stream.setEncoding('utf8');
+      stream.on('error', (err) => {
+        console.log(err);
+      });
+      stream.on('data', (msg) => {
+        dispatch(sendChat({
+          role: 'user',
+          text: msg,
+          timestamp: Date.now(),
+        }));
+      });
+    })
+    .catch((err) => {
+      console.log(`The following gUM error occured: ${err}`);
+    });
+  };
+}
 
 export function recieveChat(message) {
   return {
