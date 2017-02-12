@@ -1,19 +1,32 @@
 import axios from 'axios';
 import { hashHistory } from 'react-router';
 import recognizeMicrophone from 'watson-speech/speech-to-text/recognize-microphone';
-
+import { store } from '../index';
 import {
   AUTH_USER,
   AUTH_ERROR,
   UNAUTH_USER,
   SEND_CHAT,
   RECIEVE_CHAT,
+  ACTIVATE_VOICE,
+  DEACTIVATE_VOICE,
 } from './types';
 import { socket } from '../components/chat';
 import { BACKEND_ROOT_URL } from '../components/chat';
 
 const ROOT_URL = process.env.AUTH_ROOT_URL || 'http://localhost:3090';
 
+export function deactivateVoiceInterface() {
+  return {
+    type: DEACTIVATE_VOICE,
+  };
+}
+
+export function activateVoiceInterface() {
+  return {
+    type: ACTIVATE_VOICE,
+  };
+}
 
 export function record() {
   return function (dispatch) {
@@ -49,7 +62,11 @@ export function recieveChat(message) {
         type: RECIEVE_CHAT,
         payload: message,
       });
-    dispatch(record());
+    if (store.getState().chat.voiceinterface) {
+      // encode text
+      const synthesizeUrl = '/api/synthesize?voice=en-US_AllisonVoice&text={encodeURIComponent(message)}';
+      dispatch(record());
+    }
   };
 }
 

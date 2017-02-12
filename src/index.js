@@ -25,7 +25,8 @@ const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
 const enhancers = compose(
   window.devToolsExtension ? window.devToolsExtension() : f => f,
 );
-const store = createStoreWithMiddleware(reducers, enhancers);
+
+export const store = createStoreWithMiddleware(reducers, enhancers);
 
 const token = localStorage.getItem('token');
 // if token already exist in local storage consider user to be signed in

@@ -9,7 +9,6 @@ export const BACKEND_ROOT_URL = process.env.BACKEND_ROOT_URL || 'http://localhos
 export const socket = io(BACKEND_ROOT_URL);
 
 class Chat extends Component {
-
   componentDidMount() {
     socket.on('bot-message', (msg) => {
       console.log('Bot Message:', msg);
@@ -26,9 +25,19 @@ class Chat extends Component {
     });
   }
 
+  handleVoice() {
+    // Need to do something to log user in -> call action creator
+    if (!this.props.chat.voiceinterface) {
+      this.props.activateVoiceInterface();
+      this.props.record();
+    } else {
+      this.props.deactivateVoiceInterface();
+    }
+  }
+
   renderList() {
     // add initial check that state is initialized
-    if (!this.props.chat) {
+    if (!this.props.chat.messages) {
       return (
         <Chatbox
           usertype="bot"
@@ -36,7 +45,7 @@ class Chat extends Component {
         />
       );
     }
-    const chatMessages = this.props.chat;
+    const chatMessages = this.props.chat.messages;
     const latestMessages = chatMessages.slice(chatMessages.length - 7, chatMessages.length);
     return latestMessages.map(
       chat => (
@@ -49,6 +58,7 @@ class Chat extends Component {
   }
 
   render() {
+    const audioButtonType = this.props.chat.voiceinterface ? 'danger' : 'primary';
     // Get handleSubmit of the props, supplied by redux-form
     const { handleSubmit } = this.props;
     return (
@@ -57,7 +67,7 @@ class Chat extends Component {
         <form onSubmit={handleSubmit(this.handleSend.bind(this))}>
           <div className="form-group">
             <Field name="chatInput" component="input" type="text" className="form-control" />
-            <button type="button" className="btn btn-primary" onClick={this.props.record}>Record</button>
+            <button type="button" className={`btn btn-${audioButtonType}`} onClick={this.handleVoice.bind(this)}>Voice Interface</button>
           </div>
         </form>
       </div>
