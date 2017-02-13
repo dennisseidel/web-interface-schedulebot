@@ -64,8 +64,61 @@ export function recieveChat(message) {
       });
     if (store.getState().chat.voiceinterface) {
       // encode text
-      const synthesizeUrl = '/api/synthesize?voice=en-US_AllisonVoice&text={encodeURIComponent(message)}';
-      dispatch(record());
+      axios.get(`${BACKEND_ROOT_URL}/watsoncloud/tts/token`)
+      .then((res) => {
+        const voice = 'en-US_AllisonVoice';
+        const format = 'audio/ogg;codecs=opus';
+        const wsURI = `wss://stream.watsonplatform.net/text-to-speech/api/v1/synthesize?voice=${voice}&watson-token=${res.data.token}`;
+
+        function onOpen(evt) {
+          const speechMessage = {
+            text: message.text,
+            accept: format,
+          };
+          // The service currently accepts a single message per WebSocket connection.
+          websocket.send(JSON.stringify(speechMessage));
+        }
+
+        const audioParts = [];
+        let finalAudio;
+
+        function onMessage(evt) {
+          if (typeof evt.data === 'string') {
+            console.log('Received string message: ', evt.data);
+          } else {
+            console.log(`Received ${evt.data.size} binary bytes`, evt.data.type);
+            audioParts.push(evt.data);
+          }
+        }
+
+        function onClose(evt) {
+          console.log('WebSocket closed', evt.code, evt.reason);
+          finalAudio = new Blob(audioParts, { type: format });
+          const audio = document.createElement('audio');
+          audio.autoplay = true;
+          audio.load();
+          audio.addEventListener('load', () => audio.play(), true);
+          const blobUrl = URL.createObjectURL(finalAudio);
+          audio.src = blobUrl;
+          audio.onloadedmetadata = function () {
+            console.log('final audio duration: ', audio.duration);
+            setTimeout(() => dispatch(record()), audio.duration * 1000);
+          };
+        }
+
+        function onError(evt) {
+          console.log('WebSocket error', evt);
+        }
+
+        var websocket = new WebSocket(wsURI);
+        websocket.onopen = onOpen;
+        websocket.onclose = onClose;
+        websocket.onmessage = onMessage;
+        websocket.onerror = onError;
+      })
+     .catch((err) => {
+       console.log(`The following gUM error occured: ${err}`);
+     });
     }
   };
 }
