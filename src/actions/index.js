@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { hashHistory } from 'react-router';
 import recognizeMicrophone from 'watson-speech/speech-to-text/recognize-microphone';
+import { reset } from 'redux-form';
 import { store } from '../index';
 import {
   AUTH_USER,
@@ -130,6 +131,8 @@ export function sendChat(message) {
     dispatch({
       type: SEND_CHAT,
       payload: message });
+    // reset form after input http://redux-form.com/6.0.0-alpha.4/docs/faq/HowToClear.md/
+    dispatch(reset('chatForm'));
   };
 }
 
