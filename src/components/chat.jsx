@@ -10,9 +10,17 @@ export const socket = io(BACKEND_ROOT_URL);
 
 class Chat extends Component {
   componentDidMount() {
-    socket.on('bot-message', (msg) => {
-      console.log('Bot Message:', msg);
-      this.props.recieveChat(msg);
+    const jwt = localStorage.getItem('token');
+    socket.on('connect', () => {
+      socket.emit('authenticate', { token: jwt }) // send the jwt
+      .on('unauthorized', (msg) => {
+        console.log(`unauthorized: ${JSON.stringify(msg.data)}`);
+        throw new Error(msg.data.type);
+      })
+      .on('bot-message', (msg) => {
+        console.log('Bot Message:', msg);
+        this.props.recieveChat(msg);
+      });
     });
   }
 
