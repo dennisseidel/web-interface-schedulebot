@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
-import { Router, Route, IndexRoute, hashHistory } from 'react-router';
+import { Router, Route, IndexRoute, hashHistory, Redirect } from 'react-router';
 import reduxThunk from 'redux-thunk';
 
 //import '../node_modules/bootstrap/dist/css/bootstrap.css';
@@ -35,12 +35,19 @@ if (token) {
   store.dispatch({ type: AUTH_USER });
 }
 
+// check if allready authenticated and redirect if yes to /chat
+function checkAuth() {
+  if (store.getState().auth.authenticated) {
+    hashHistory.push('/chat');
+  } 
+}
+
 // Put components into HTML
 ReactDOM.render(
   <Provider store={store}>
     <Router history={hashHistory}>
-      <Route path="/" component={App}>
-        <IndexRoute component={WelcomePage} />
+      <Route exact path="/" component={App}>
+        <IndexRoute component={WelcomePage} onEnter={checkAuth}/>
         <Route path="signin" component={SigninForm} />
         <Route path="signout" component={SignoutPage} />
         <Route path="signup" component={SignupForm} />
