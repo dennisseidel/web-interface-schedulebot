@@ -25,11 +25,17 @@ class Chat extends Component {
   }
 
   handleSend({ chatInput }) {
+    // check if context is defined
+    let context = this.props.chat.context;
+    if (typeof context === 'undefined') {
+      context = {};
+    }
     // Need to do something to log user in -> call action creator
     this.props.sendChat({
       role: 'user',
       text: chatInput,
       timestamp: Date.now(),
+      context,
     });
   }
 

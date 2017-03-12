@@ -43,7 +43,14 @@ export default function (state = {
     case SEND_CHAT:
       return { ...state, messages: state.messages.concat(action.payload) };
     case RECIEVE_CHAT:
-      return { ...state, messages: state.messages.concat(action.payload) };
+      return { ...state,
+        messages: state.messages.concat({
+          role: action.payload.role,
+          text: action.payload.text,
+          timestamp: action.payload.timestamp,
+        }),
+        context: action.payload.context,
+      };
     case ACTIVATE_VOICE:
       return { ...state, voiceinterface: true };
     case DEACTIVATE_VOICE:
