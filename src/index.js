@@ -55,4 +55,4 @@ ReactDOM.render(
       </Route>
     </Router>
   </Provider>,
-  document.querySelector('.root'));
+  document.querySelector('.root-container'));
