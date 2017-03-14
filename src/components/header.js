@@ -27,7 +27,7 @@ class Header extends Component {
   render() {
     return (
       <nav className="navbar navbar-toggleable-md navbar-inverse bg-inverse">
-        <Link to="/" className="navbar-brand mb-0">DriveABot</Link>
+        <Link to="/" className="navbar-brand mb-0">NowBot</Link>
         <ul className="nav navbar-nav">
           {this.renderLinks()}
         </ul>
